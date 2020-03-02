@@ -9,6 +9,13 @@ namespace WebApiDemo.Controllers
 {
     public class ValuesController : ApiController
     {
+        readonly IValueService _valueService;
+
+        public ValuesController(IValueService valueService)
+        {
+            _valueService = valueService;
+        }
+
         static List<string> strings = new List<string>()
         {
             "value0","value1","value2"
@@ -17,7 +24,7 @@ namespace WebApiDemo.Controllers
         // GET api/values
         public IEnumerable<string> Get()
         {
-            return strings;
+            return _valueService.GetValues();
         }
 
         // GET api/values/5
